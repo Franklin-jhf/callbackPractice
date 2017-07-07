@@ -23,7 +23,9 @@ and what you should write is the sayHi function that makes the code above work,
 // 1. Write a function called first that returns the first item of the array using a callback function
 
   // Code Here
-
+function first(names, cb) {
+    cb(names[0]);
+}
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -36,6 +38,10 @@ first(names, function(firstName){
 
   //Code Here
 
+var last = function(arr, cb) {
+    cb(arr[arr.length-1]);
+}
+
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
 });
@@ -45,7 +51,9 @@ last(names, function(lastName){
 // 3. Write a function called multiply that multiplies two numbers using a callback function.
 
   //Code Here
-
+var multiply = function (x, y, cb) {
+    cb(x * y);
+}
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
@@ -57,6 +65,9 @@ multiply(4, 3, function(answer){
 // If it does, return true using the callback, if not return false.
 
   //Code Here 
+var contains = function(names, name, cb) {
+    cb(names.indexOf(name) !== -1);
+}
 
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -73,6 +84,12 @@ contains(names, 'Colt', function(result){
 
     //Code Here
 
+    var uniq = function(names, cb) {
+        cb(names.filter(function(val, i, self) {
+            return self.indexOf(val) === i;
+        }));
+    }
+
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
 });
@@ -82,6 +99,12 @@ uniq(names, function(uniqArr){
 // function to return the indices and item.
 
     //Code Here 
+
+var each = function(names, cb) {
+    names.map(function(val, i, arr) {
+        cb(val, i);
+    })
+}
 
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
@@ -93,6 +116,14 @@ each(names, function(item, indice){
 // and returns that user.
 
  //Code Here
+
+var getUserById = function(users, x, cb) {
+    users.map(function(obj, i, arr) {
+        if (obj.id === x) {
+            cb(obj);
+        }
+    });
+}
 
 var users = [
   {
